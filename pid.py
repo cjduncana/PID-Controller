@@ -21,5 +21,7 @@ class PID:
             controlVariable = self.kp * error + self.ki * self.sumOfPastErrors + self.kd * changeInError
             self.previousError = error
             return controlVariable
+        else:
+            return Decimal("0")
 
     
