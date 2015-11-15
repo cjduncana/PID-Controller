@@ -1,5 +1,6 @@
 
 from decimal import Decimal
+from time import time
 
 class PID:
 
@@ -8,6 +9,7 @@ class PID:
         self.previousError = Decimal("0")
         self.sumOfPastErrors = Decimal("0")
         self.setPoint = setPoint
+        self.previousTime = Decimal(time())
         self.timeInterval = timeInterval
         self.kp = kp
         self.ki = ki
@@ -15,11 +17,18 @@ class PID:
 
     def update(self):
         if self.model:
+            now = Decimal(time())
+            changeInTime = now - self.previousTime
+
             error = self.setPoint - self.model.pop()
-            self.sumOfPastErrors = self.sumOfPastErrors + (error * self.timeInterval)
-            changeInError = (error - self.previousError) / self.timeInterval
+            self.sumOfPastErrors = self.sumOfPastErrors + (error * self.changeInTime)
+            changeInError = (error - self.previousError) / self.changeInTime
+
             controlVariable = self.kp * error + self.ki * self.sumOfPastErrors + self.kd * changeInError
+            
             self.previousError = error
+            self.previousTime = now
+
             return controlVariable
         else:
             return Decimal("0")
