@@ -33,4 +33,8 @@ class PID:
         else:
             return Decimal("0")
 
-    
+    def tune(self, kp, ki, kd):
+        self.kp = kp
+        self.ki = ki
+        self.kd = kd
+        
