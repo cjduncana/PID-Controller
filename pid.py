@@ -23,8 +23,8 @@ class PID:
             changeInTime = now - self.previousTime
 
             error = self.setPoint - self.model.pop()
-            self.sumOfErrors = self.sumOfErrors + (error * self.changeInTime)
-            changeInError = (error - self.previousError) / self.changeInTime
+            self.sumOfErrors = self.sumOfErrors + (error * changeInTime)
+            changeInError = (error - self.previousError) / changeInTime
 
             controlVariable = self.kp * error + self.ki * self.sumOfErrors + self.kd * changeInError
             
