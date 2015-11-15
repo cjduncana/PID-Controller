@@ -4,7 +4,7 @@ from time import time
 
 class PID:
 
-    def __init__(self, setPoint, timeInterval = Decimal("10"), kp = Decimal("1"), ki = Decimal("0.0005"), kd = Decimal("10")):
+    def __init__(self, setPoint, kp = Decimal("1"), ki = Decimal("0.0005"), kd = Decimal("10")):
         self.model = []
         self.setPoint = setPoint
 
@@ -12,7 +12,6 @@ class PID:
         self.sumOfErrors = Decimal("0")
 
         self.previousTime = Decimal(time())
-        self.timeInterval = timeInterval
 
         self.kp = kp
         self.ki = ki
