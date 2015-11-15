@@ -10,7 +10,7 @@ class PID:
         self.model.append(setPoint)
 
         self.previousInput = Decimal("0")
-        self.sumOfErrors = Decimal("0")
+        self.integral = Decimal("0")
 
         self.previousTime = Decimal(time())
 
@@ -25,10 +25,10 @@ class PID:
         processVariable = self.model.pop()
 
         error = self.setPoint - processVariable
-        self.sumOfErrors = self.sumOfErrors + (error * changeInTime)
+        self.integral = self.integral + (ki * error * changeInTime)
         changeInInput = (processVariable - self.previousInput) / changeInTime
 
-        controlVariable = self.kp * error + self.ki * self.sumOfErrors - self.kd * changeInInput
+        controlVariable = self.kp * error + self.integral - self.kd * changeInInput
 
         self.previousInput = processVariable
         self.previousTime = now
