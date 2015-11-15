@@ -4,7 +4,10 @@ from time import time
 
 class PID:
 
-    def __init__(self, setPoint, kp = Decimal("1"), ki = Decimal("0.0005"), kd = Decimal("10")):
+    def __init__(self, setPoint,
+                 kp = Decimal("1"),
+                 ki = Decimal("0.0005"),
+                 kd = Decimal("10")):
         self.setPoint = setPoint
         self.model = []
         self.model.append(setPoint)
@@ -26,9 +29,11 @@ class PID:
 
         error = self.setPoint - processVariable
         self.integral = self.integral + (ki * error * changeInTime)
-        changeInInput = (processVariable - self.previousInput) / changeInTime
+        changeInInput = (processVariable - self.previousInput) /
+                        changeInTime
 
-        controlVariable = self.kp * error + self.integral - self.kd * changeInInput
+        controlVariable = self.kp * error + self.integral -
+                          self.kd * changeInInput
 
         self.previousInput = processVariable
         self.previousTime = now
