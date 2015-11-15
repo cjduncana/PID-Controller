@@ -45,5 +45,5 @@ class PID:
         self.ki = ki
         self.kd = kd
 
-    def setSetPoint(self, setPoint):
+    def set_setpoint(self, setPoint):
         self.setPoint = setPoint
