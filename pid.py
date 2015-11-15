@@ -6,11 +6,14 @@ class PID:
 
     def __init__(self, setPoint, timeInterval = Decimal("10"), kp = Decimal("1"), ki = Decimal("0.0005"), kd = Decimal("10")):
         self.model = []
-        self.previousError = Decimal("0")
-        self.sumOfPastErrors = Decimal("0")
         self.setPoint = setPoint
+
+        self.previousError = Decimal("0")
+        self.sumOfErrors = Decimal("0")
+
         self.previousTime = Decimal(time())
         self.timeInterval = timeInterval
+
         self.kp = kp
         self.ki = ki
         self.kd = kd
@@ -21,10 +24,10 @@ class PID:
             changeInTime = now - self.previousTime
 
             error = self.setPoint - self.model.pop()
-            self.sumOfPastErrors = self.sumOfPastErrors + (error * self.changeInTime)
+            self.sumOfErrors = self.sumOfErrors + (error * self.changeInTime)
             changeInError = (error - self.previousError) / self.changeInTime
 
-            controlVariable = self.kp * error + self.ki * self.sumOfPastErrors + self.kd * changeInError
+            controlVariable = self.kp * error + self.ki * self.sumOfErrors + self.kd * changeInError
             
             self.previousError = error
             self.previousTime = now
@@ -37,4 +40,3 @@ class PID:
         self.kp = kp
         self.ki = ki
         self.kd = kd
-        
