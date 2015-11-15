@@ -5,10 +5,11 @@ from time import time
 class PID:
 
     def __init__(self, setPoint, kp = Decimal("1"), ki = Decimal("0.0005"), kd = Decimal("10")):
-        self.model = []
         self.setPoint = setPoint
+        self.model = []
+        self.model.append(setPoint)
 
-        self.previousError = Decimal("0")
+        self.previousInput = Decimal("0")
         self.sumOfErrors = Decimal("0")
 
         self.previousTime = Decimal(time())
@@ -18,24 +19,26 @@ class PID:
         self.kd = kd
 
     def update(self):
-        if self.model:
-            now = Decimal(time())
-            changeInTime = now - self.previousTime
+        now = Decimal(time())
+        changeInTime = now - self.previousTime
 
-            error = self.setPoint - self.model.pop()
-            self.sumOfErrors = self.sumOfErrors + (error * changeInTime)
-            changeInError = (error - self.previousError) / changeInTime
+        processVariable = self.model.pop()
 
-            controlVariable = self.kp * error + self.ki * self.sumOfErrors + self.kd * changeInError
-            
-            self.previousError = error
-            self.previousTime = now
+        error = self.setPoint - processVariable
+        self.sumOfErrors = self.sumOfErrors + (error * changeInTime)
+        changeInInput = (processVariable - self.previousInput) / changeInTime
 
-            return controlVariable
-        else:
-            return Decimal("0")
+        controlVariable = self.kp * error + self.ki * self.sumOfErrors - self.kd * changeInInput
+
+        self.previousInput = processVariable
+        self.previousTime = now
+
+        return controlVariable
 
     def tune(self, kp, ki, kd):
         self.kp = kp
         self.ki = ki
         self.kd = kd
+
+    def setSetPoint(self, setPoint):
+        self.setPoint = setPoint
