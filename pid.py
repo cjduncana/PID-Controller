@@ -29,11 +29,11 @@ class PID:
 
         error = self.setPoint - processVariable
         self.integral = self.integral + (ki * error * changeInTime)
-        changeInInput = (processVariable - self.previousInput) /
-                        changeInTime
+        changeInInput = (processVariable - self.previousInput) \
+        / changeInTime
 
-        controlVariable = self.kp * error + self.integral -
-                          self.kd * changeInInput
+        controlVariable = self.kp * error + self.integral - self.kd \
+        * changeInInput
 
         self.previousInput = processVariable
         self.previousTime = now
