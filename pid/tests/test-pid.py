@@ -14,3 +14,17 @@ class TestPID(unittest.TestCase):
         for x in xrange(1,100):
             xpid.update()
         assert xpid.update() == decimal.Decimal("0")
+
+    def test_tuning(self):
+        xpid = pid.PID(decimal.Decimal("50"))
+        xpid.tune(decimal.Decimal("2"),
+                  decimal.Decimal("0.0001"),
+                  decimal.Decimal("11"))
+        assert xpid.kp == decimal.Decimal("2")
+           and xpid.ki == decimal.Decimal("0.0001")
+           and xpid.kd == decimal.Decimal("11")
+
+    def test_setting_new_setpoint(self):
+        xpid = pid.PID(decimal.Decimal("50"))
+        xpid.set_setpoint("100")
+        assert xpid.setPoint == decimal.Decimal("100")
