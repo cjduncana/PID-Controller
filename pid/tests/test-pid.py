@@ -20,8 +20,8 @@ class TestPID(unittest.TestCase):
         xpid.tune(decimal.Decimal("2"),
                   decimal.Decimal("0.0001"),
                   decimal.Decimal("11"))
-        assert xpid.kp == decimal.Decimal("2")
-           and xpid.ki == decimal.Decimal("0.0001")
+        assert xpid.kp == decimal.Decimal("2") \
+           and xpid.ki == decimal.Decimal("0.0001") \
            and xpid.kd == decimal.Decimal("11")
 
     def test_setting_new_setpoint(self):
