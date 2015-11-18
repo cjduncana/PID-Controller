@@ -26,5 +26,5 @@ class TestPID(unittest.TestCase):
 
     def test_setting_new_setpoint(self):
         xpid = pid.PID(decimal.Decimal("50"))
-        xpid.set_setpoint("100")
+        xpid.set_setpoint(decimal.Decimal("100"))
         assert xpid.setPoint == decimal.Decimal("100")
