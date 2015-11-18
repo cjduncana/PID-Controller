@@ -2,7 +2,7 @@
 import decimal
 import time
 
-class PID:
+class PID(object):
 
     def __init__(self, setPoint,
                  kp = decimal.Decimal("1"),
