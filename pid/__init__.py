@@ -4,7 +4,7 @@ import time
 
 class PID(object):
 
-    def __init__(self, setPoint, initialPoint
+    def __init__(self, setPoint, initialPoint,
                  kp = decimal.Decimal("1"),
                  ki = decimal.Decimal("0.0005"),
                  kd = decimal.Decimal("10")):
