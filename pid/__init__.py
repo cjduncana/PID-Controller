@@ -4,15 +4,15 @@ import time
 
 class PID(object):
 
-    def __init__(self, setPoint,
+    def __init__(self, setPoint, initialPoint
                  kp = decimal.Decimal("1"),
                  ki = decimal.Decimal("0.0005"),
                  kd = decimal.Decimal("10")):
         self.setPoint = setPoint
         self.model = []
-        self.model.append(setPoint)
+        self.model.append(initialPoint)
 
-        self.previousInput = decimal.Decimal(setPoint)
+        self.previousInput = decimal.Decimal(initialPoint)
         self.integral = decimal.Decimal("0")
 
         self.previousTime = decimal.Decimal(time.time())
@@ -49,3 +49,6 @@ class PID(object):
 
     def set_setpoint(self, setPoint):
         self.setPoint = setPoint
+
+    def add_point(self, point):
+        self.model.append(point)
