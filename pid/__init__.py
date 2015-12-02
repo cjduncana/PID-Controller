@@ -12,7 +12,7 @@ class PID(object):
         self.model = []
         self.model.append(initialPoint)
 
-        self.previousInput = decimal.Decimal(initialPoint)
+        self.previousInput = initialPoint
         self.integral = decimal.Decimal("0")
 
         self.previousTime = decimal.Decimal(time.time())
