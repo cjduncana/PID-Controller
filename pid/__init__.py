@@ -28,8 +28,7 @@ class PID(object):
         processVariable = self.model[-1]
 
         error = self.setPoint - processVariable
-        self.integral = self.integral + (self.ki * error \
-        * changeInTime)
+        self.integral += self.ki * error * changeInTime
         changeInInput = (processVariable - self.previousInput) \
         / changeInTime
 
